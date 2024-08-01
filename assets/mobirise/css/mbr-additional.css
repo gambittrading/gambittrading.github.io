@@ -811,6 +811,11 @@ a {
 .cid-sFCw1qGFAI .navbar.collapsed.opened .dropdown-menu {
   top: 0;
 }
+@media (min-width: 992px) {
+  .cid-sFCw1qGFAI .navbar.collapsed.opened:not(.navbar-short) .navbar-collapse {
+    max-height: calc(98.5vh - 3rem);
+  }
+}
 .cid-sFCw1qGFAI .navbar.collapsed .dropdown-menu .dropdown-submenu {
   left: 0 !important;
 }
@@ -1484,6 +1489,9 @@ a {
   font-size: 2rem;
   padding-right: 1.5rem;
   color: #6592e6;
+}
+.cid-sFzIA7KGYz .card-title DIV {
+  text-align: center;
 }
 .cid-sFAxp7Y5iM {
   padding-top: 0rem;
