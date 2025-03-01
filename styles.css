@@ -1,0 +1,227 @@
+/* styles.css */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #f8f9fa;
+    --text-color: #34495e;
+    --hover-color: #2980b9;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.filters-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.filter-group {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.styled-select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    transition: border-color 0.3s ease;
+}
+
+.styled-select:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+}
+
+.results-section {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.students-card, .grades-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.students-container {
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.student-item {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.student-item:hover {
+    transform: translateX(5px);
+}
+
+.grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.grades-table th, .grades-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.grades-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.grades-table tr:hover {
+    background-color: #f5f6fa;
+}
+
+.badge {
+    padding: 0.3rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.badge-primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.fas {
+    margin-right: 0.5rem;
+}
+
+/* En tu archivo styles.css */
+.failing-grade {
+    background-color: #ffebee;
+    color: #c62828;
+    position: relative;
+    font-weight: bold;
+}
+
+.failing-grade td:first-child {
+    border-left: 3px solid #c62828;
+}
+
+.failing-grade td:last-child {
+    border-right: 3px solid #c62828;
+}
+
+.failing-grade td {
+    background-color: #ffebee !important;
+}
+
+.failing-grade::after {
+    content: "⚠ Bajo rendimiento";
+    position: absolute;
+    right: 10px;
+    font-size: 0.8em;
+    opacity: 0.8;
+    font-weight: normal;
+}
+/* ok */
+/* styles.css */
+.text-alerta {
+    color: #dc3545;
+    font-weight: 500;
+    background: #ffeef0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.inactive-student {
+    background: #fff5f5;
+    border-left: 4px solid #dc3545;
+    opacity: 0.8;
+}
+
+.documento {
+    font-size: 0.85em;
+    color: #666;
+}
+/* Estilos para la información del profesor */
+.profesor-info {
+    background: #e3f2fd;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #1976d2;
+    font-weight: 500;
+}
+
+.profesor-alerta {
+    background: #fff3e0;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #ef6c00;
+    font-weight: 500;
+}
+
+/* Mejoras para la tabla */
+.grades-table th {
+    white-space: nowrap;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.badge-danger {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.badge-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
