@@ -30,6 +30,7 @@ const loadCSV = async (file) => {
     const notas = await loadCSV('notas.csv');
     const profesores = await loadCSV('profesores.csv');
     const profesoresMaterias = await loadCSV('profesores_materias.csv');
+    const asistencia = await loadCSV('asistencia.csv');
 
     // Cargar instituciones en el select
     const institucionesSelect = document.getElementById('instituciones');
@@ -97,14 +98,25 @@ const loadCSV = async (file) => {
         const idMateria = e.target.value;
         const notasContainer = document.getElementById('notas-container');
         const profesorContainer = document.getElementById('profesor-asignado'); // Nuevo contenedor
+        const asistenciaContainer = document.getElementById('asistencia-container');
+        const idInstitucion = document.getElementById('instituciones').value; 
         
         notasContainer.innerHTML = '';
+        asistenciaContainer.innerHTML = '';
         profesorContainer.innerHTML = '';
     
-        if (idMateria) {
+        if (idMateria && idInstitucion) {
             // Obtener profesor asignado
-            const relacionPM = profesoresMaterias.find(pm => pm[2] === idMateria);
-            const profesor = profesores.find(p => p[0] === (relacionPM ? relacionPM[1] : null));
+            const relacionPM = profesoresMaterias.find(pm => 
+                pm[2] === idMateria && // Filtra por materia
+                pm[3] === idInstitucion // Filtra por institución
+            );
+            
+            const profesor = profesores.find(p => 
+                p[0] === (relacionPM ? relacionPM[1] : null) // Busca el profesor en la relación
+            );
+            const materiaSeleccionada = materias.find(m => m[0] === idMateria);
+            const estudiantesInstitucion = alumnos.filter(a => a[4] === idInstitucion);
             
             // Mostrar información del profesor
             if (profesor) {
@@ -136,7 +148,9 @@ const loadCSV = async (file) => {
                 </thead>
                 <tbody>
                     ${notas
-                        .filter(n => n[2] === idMateria)
+                        .filter(n => 
+                            n[2] === idMateria && 
+                            estudiantesInstitucion.some(e => e[0] === n[1]))
                         .map(([id, alumnoId, materiaId, profesorId, calificacion, fecha]) => {
                             const alumno = alumnos.find(a => a[0] === alumnoId);
                             const notaNumerica = parseFloat(calificacion);
@@ -155,6 +169,66 @@ const loadCSV = async (file) => {
                 </tbody>
             `;
             notasContainer.appendChild(table);
+
+            const tableAsistencia = document.createElement('table');
+        tableAsistencia.className = 'attendance-table';
+        tableAsistencia.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Fecha</th>
+                    <th>Asistencia</th>
+                    <th>% Asistencia</th>
+                </tr>
+            </thead>
+            <tbody>
+            ${alumnos
+                .filter(alumno => (alumno[4] === idInstitucion &&(
+                    notas.some(n => n[1] === alumno[0] && n[2] === idMateria) ||
+                    asistencia.some(a => a[1] === alumno[0] && a[2] === idMateria)
+                ))).sort((a, b) => new Date(a[3]) - new Date(b[3])) // Ordenar por fecha
+                .map(alumno => {
+                    const asistenciasAlumno = asistencia.filter(a => 
+                        a[1] === alumno[0] && a[2] === idMateria &&
+                        alumnos.some(al => al[0] === a[1] && al[4] === idInstitucion) // Validar institució
+                    );
+                    const totalClases = asistenciasAlumno.length;
+                    const presentes = asistenciasAlumno.filter(a => a[4] === '1').length;
+                    const porcentaje = totalClases > 0 
+                        ? ((presentes / totalClases) * 100).toFixed(1)
+                        : '0.0';
+
+                    return `
+                        <tr>
+                            <td>${alumno[1]}</td>
+                            <td>${asistenciasAlumno
+                                .map(a => new Date(a[3]).toLocaleDateString('es-CO'
+                                , {
+                                    day: 'numeric',
+                                    month: 'numeric',
+                                    year: '2-digit'
+                                }))
+                                .join(' | ')}</td>
+                            <td>
+                                ${asistenciasAlumno.map(a => 
+                                    a[4] === '1' 
+                                        ? '<span class="presente-badge">✔</span>' 
+                                        : '<span class="ausente-badge">✖</span>'
+                                ).join(' ')}
+                            </td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${porcentaje}%">
+                                        ${porcentaje}%
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('')}
+            </tbody>
+        `;
+        asistenciaContainer.appendChild(tableAsistencia);
         }
     });
 });

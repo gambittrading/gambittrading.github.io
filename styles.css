@@ -225,3 +225,99 @@ body {
     background: #e8f5e9;
     color: #2e7d32;
 }
+/* asistencia */
+/* Barra de progreso para asistencia */
+.progress-bar {
+    width: 100%;
+    height: 24px;
+    background-color: #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    min-width: 40px;
+    transition: width 0.5s ease;
+}
+
+/* Mejoras responsive */
+@media (max-width: 768px) {
+    .attendance-table th:nth-child(4),
+    .attendance-table td:nth-child(4) {
+        display: none;
+    }
+    
+    .presente-badge, .ausente-badge {
+        margin: 2px;
+    }
+}
+
+/* Colores para estados de asistencia */
+.presente-badge {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.ausente-badge {
+    color: #c62828;
+    font-weight: bold;
+}
+ .attendance-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.attendance-container {
+    overflow-x: auto;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+/*-----------*/
+.attendance-table th,
+.attendance-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.attendance-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.presente-badge {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+}
+
+.ausente-badge {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+}
+
+@media (max-width: 768px) {
+    .attendance-table {
+        min-width: 600px;
+    }
+} 
