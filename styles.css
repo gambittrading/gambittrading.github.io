@@ -75,8 +75,11 @@ body {
 }
 
 .students-container {
-    max-height: 700px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: visible;
+    max-height: none;
 }
 
 .student-item {
@@ -84,9 +87,9 @@ body {
     margin: 0.5rem 0;
     background: #f8f9fa;
     border-radius: var(--border-radius);
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
     transition: transform 0.2s ease;
 }
 

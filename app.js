@@ -66,8 +66,8 @@ const loadCSV = async (file) => {
                             ${activo === '1' ? 'Activo' : 'SE RETIRÓ'}
                         </div>
                         <div class="student-details">
-                            <span class="badge badge-primary">ID: ${id}</span>
-                            <span class="documento">Doc: ${documento}</span>
+                            <span class="badge badge-primary">Doc: ${documento}</span>
+                           <!-- <span class="documento">Doc: ${documento}</span>-->
                         </div>
                     </div>
                 `;
