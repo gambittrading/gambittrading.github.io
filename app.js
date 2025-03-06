@@ -49,6 +49,9 @@ const loadCSV = async (file) => {
         // Limpiar contenedores
         estudiantesContainer.innerHTML = '';
         materiasSelect.innerHTML = '<option value="">Seleccione una materia</option>';
+        document.getElementById('notas-container').innerHTML = ''; // Nuevo
+        document.getElementById('asistencia-container').innerHTML = ''; // Nuevo
+        document.getElementById('profesor-asignado').innerHTML = ''; // Nuevo
         
         if (idInstitucion) {
             // Filtrar estudiantes
@@ -80,6 +83,7 @@ const loadCSV = async (file) => {
                     .filter(am => estudiantes.some(e => e[0] === am[1]))
                     .map(am => am[2])
             );
+            
             
             materias.forEach(([id, nombre, desc]) => {
                 if (materiasIds.has(id)) {
